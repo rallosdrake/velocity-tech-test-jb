@@ -1,0 +1,22 @@
+<li class="MiniItem" data-line-key="{{ item.key }}">
+    <a class="MiniItem__Media" href="{{ item.url }}" aria-hidden="true" tabindex="-1">
+      {%- if item.image -%}
+        <img src="{{ item.image | image_url: width: 160 }}" alt="" loading="lazy" width="160" height="auto">
+      {%- endif -%}
+    </a>
+    <div class="MiniItem__Content">
+      <a class="MiniItem__Title" href="{{ item.url }}">{{ item.product.title }}</a>
+      {%- if item.variant.title != 'Default Title' -%}
+        <div class="MiniItem__Meta">{{ item.variant.title }}</div>
+      {%- endif -%}
+      <div class="MiniItem__Row">
+        <div class="MiniItem__Qty">
+          <button class="QtyBtn" data-action="decrement" aria-label="Decrease quantity">−</button>
+          <input class="QtyInput" type="number" inputmode="numeric" min="0" value="{{ item.quantity }}" aria-label="Quantity">
+          <button class="QtyBtn" data-action="increment" aria-label="Increase quantity">+</button>
+        </div>
+        <div class="MiniItem__Price">{{ item.final_line_price | money }}</div>
+        <button class="IconButton" data-action="remove" aria-label="Remove {{ item.product.title }}">&times;</button>
+      </div>
+    </div>
+  </li>
