@@ -12,9 +12,15 @@
   <meta name="description" content="">
 
   {{ content_for_header }}
+  <link rel="stylesheet" href="{{ 'base.css' | asset_url }}">
+  <link>
 </head>
 
 <body>
+  {%- section 'main-header' -%}
   {{ content_for_layout }}
+  {%- section 'cart-drawer' -%}
+  <script src="{{ 'cart-drawer.js' | asset_url }}" defer></script>
+  <script src="{{ 'collection.js' | asset_url }}" defer></script>
 </body>
 </html>
