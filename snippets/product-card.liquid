@@ -1,0 +1,44 @@
+{%- liquid
+    assign first_available_variant = product.first_available_variant
+    if first_available_variant == nil
+      assign first_available_variant = product.variants.first
+    endif
+  -%}
+  <article class="ProductCard" data-product-id="{{ product.id }}">
+    <a class="ProductCard__Link" href="{{ product.url }}" aria-label="View {{ product.title }}">
+      <div class="ProductCard__Media" style="aspect-ratio: 1/1;">
+        {%- if product.featured_image -%}
+        <img
+            src="{{ product.featured_image | image_url: width: 800 }}"
+            srcset="{{ product.featured_image | image_url: width: 400 }} 400w, {{ product.featured_image | image_url: width: 800 }} 800w, {{ product.featured_image | image_url: width: 1200 }} 1200w"
+            sizes="(min-width: 990px) 25vw, 50vw"
+            alt="{{ product.featured_image.alt | escape }}"
+            loading="lazy"
+            class="ProductCard__Image"
+            width="800"
+            height="800"
+        >
+        {%- else -%}
+          <div class="ProductCard__Placeholder" aria-hidden="true"></div>
+        {%- endif -%}
+      </div>
+      <h2 class="ProductCard__Title">{{ product.title }}</h2>
+    </a>
+  
+    <div class="ProductCard__Price">
+      {%- render 'price', product: product -%}
+    </div>
+  
+    <button
+      class="Button js-add-to-cart"
+      type="button"
+      data-variant-id="{{ first_available_variant.id }}"
+      {% unless first_available_variant.available %}disabled aria-disabled="true"{% endunless %}
+    >
+      {%- if first_available_variant.available -%}
+        Add to cart
+      {%- else -%}
+        Sold out
+      {%- endif -%}
+    </button>
+  </article>
