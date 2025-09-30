@@ -31,7 +31,7 @@
     background: #111;
     color: #fff;
     cursor: pointer;
-    transition: transform var(--dur);
+    transition: transform var(--duration);
   }
   
   .Button[disabled] {

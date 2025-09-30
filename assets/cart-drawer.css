@@ -19,7 +19,7 @@
   padding: 16px;
   box-shadow: var(--elev);
   transform: translateX(100%);
-  transition: transform var(--dur);
+  transition: transform var(--duration);
 }
 
 .CartDrawer[data-open="true"] .CartDrawer__Panel {
@@ -94,7 +94,7 @@
   background: rgba(100, 119, 154, 0.35);
   backdrop-filter: blur(6px);
   opacity: 0;
-  transition: opacity var(--dur);
+  transition: opacity var(--duration);
 }
 
 .CartDrawer[data-open="true"] .CartDrawer__Overlay {

@@ -2,7 +2,7 @@
   --container: clamp(16px, 4vw, 80px);
   --radius: 12px;
   --elev: 0 10px 30px rgba(0, 0, 0, 0.08);
-  --dur: 0.25s;
+  --duration: 0.25s;
 }
 
 * {
