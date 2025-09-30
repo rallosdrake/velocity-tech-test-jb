@@ -1,0 +1,58 @@
+.grid {
+    display: grid;
+    gap: 24px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+  
+  .ProductCard {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .ProductCard__Media {
+    background: #f6f6f6;
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  
+  .ProductCard__Title {
+    font-size: 0.95rem;
+    margin: 8px 0 0;
+  }
+  
+  .Button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 14px;
+    border-radius: 9999px;
+    border: 1px solid #111;
+    background: #111;
+    color: #fff;
+    cursor: pointer;
+    transition: transform var(--dur);
+  }
+  
+  .Button[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  .Button:active {
+    transform: scale(0.98);
+  }
+  
+  .Price {
+    display: inline-flex;
+    gap: 8px;
+    align-items: baseline;
+  }
+  
+  .Price--sale .Price__Current {
+    color: #b00020;
+  }
+  
+  .Price__Compare {
+    opacity: 0.6;
+  }
