@@ -1,0 +1,46 @@
+{{ 'cart-drawer.css' | asset_url | stylesheet_tag }}
+
+<div
+    id="CartDrawer"
+    class="CartDrawer"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="CartDrawer-Title"
+    hidden
+  >
+    <div class="CartDrawer__Overlay" data-action="close"></div>
+    <aside class="CartDrawer__Panel" tabindex="-1">
+      <header class="CartDrawer__Header">
+        <h2 id="CartDrawer-Title">Your cart</h2>
+        <button class="IconButton" aria-label="Close cart" data-action="close">&times;</button>
+      </header>
+  
+      <div class="CartDrawer__Body" aria-live="polite">
+        {%- if cart != empty -%}
+          <ul class="CartDrawer__Items">
+            {%- for item in cart.items -%}
+              {% render 'mini-line-item', item: item %}
+            {%- endfor -%}
+          </ul>
+        {%- else -%}
+          <p class="CartDrawer__Empty">Your cart is empty.</p>
+        {%- endif -%}
+      </div>
+  
+      <footer class="CartDrawer__Footer">
+        <div class="CartDrawer__Subtotal">
+          <span>Subtotal</span>
+          <strong class="js-cart-subtotal">{{ cart.total_price | money }}</strong>
+        </div>
+        <p class="CartDrawer__Note">Taxes and shipping calculated at checkout.</p>
+        <a class="Button Button--primary" href="/checkout">Checkout</a>
+      </footer>
+    </aside>
+  </div>
+  
+  {% schema %}
+  {
+    "name": "Cart drawer",
+    "settings": []
+  }
+  {% endschema %}
