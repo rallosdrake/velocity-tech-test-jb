@@ -1,0 +1,24 @@
+{{ 'header.css' | asset_url | stylesheet_tag }}
+
+<header class="Header" role="banner">
+  <div class="Header__Inner">
+    <a href="/" class="Header__Logo">LOGO</a>
+
+    <nav class="Header__Icons">
+      <a href="/account" class="Header__Icon" aria-label="Account">
+        {% render 'icon-account' %}
+      </a>
+      <button class="Header__Icon js-cart-toggle" aria-label="Cart">
+        {% render 'icon-cart' %}
+        <span class="Header__CartCount js-cart-count" aria-hidden="true">0</span>
+      </button>
+    </nav>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": []
+}
+{% endschema %}
