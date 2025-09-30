@@ -1,108 +1,102 @@
 .CartDrawer {
-    position: fixed;
-    inset: 0;
-    z-index: 1000;
-  }
-  
-  .CartDrawer[hidden] {
-    display: none;
-  }
-  
-  .CartDrawer__Overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.4);
-  }
-  
-  .CartDrawer__Panel {
-    position: absolute;
-    inset: auto 0 0 auto;
-    top: 0;
-    height: 100%;
-    width: min(420px, 100%);
-    background: #fff;
-    border-radius: 16px 0 0 16px;
-    padding: 16px;
-    box-shadow: var(--elev);
-    transform: translateX(100%);
-    transition: transform var(--dur);
-  }
-  
-  .CartDrawer[data-open="true"] .CartDrawer__Panel {
-    transform: translateX(0);
-  }
-  
-  .CartDrawer__Header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 8px;
-  }
-  
-  .CartDrawer__Body {
-    max-height: calc(100% - 160px);
-    overflow: auto;
-    padding-right: 8px;
-  }
-  
-  .CartDrawer__Items {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-  
-  .MiniItem {
-    display: grid;
-    grid-template-columns: 72px 1fr;
-    gap: 12px;
-    align-items: center;
-  }
-  
-  .MiniItem__Row {
-    display: flex;
-    gap: 12px;
-    align-items: center;
-    justify-content: space-between;
-  }
-  
-  .QtyBtn {
-    border: 1px solid #ddd;
-    background: #fff;
-    border-radius: 8px;
-    width: 28px;
-    height: 28px;
-  }
-  
-  .QtyInput {
-    width: 52px;
-    text-align: center;
-  }
-  
-  .IconButton {
-    border: none;
-    background: transparent;
-    font-size: 24px;
-    line-height: 1;
-    cursor: pointer;
-  }
-  
-  .Button--primary {
-    background: #0a0a0a;
-    color: #fff;
-  }
-    .CartDrawer__Overlay {
-        position: absolute;
-        inset: 0;
-        background: rgba(100, 119, 154, 0.35);
-        backdrop-filter: blur(6px);
-        opacity: 0;
-        transition: opacity var(--dur);
-    }
-    
-    .CartDrawer[data-open="true"] .CartDrawer__Overlay {
-        opacity: 1;
-    }
-    
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+}
+
+.CartDrawer[hidden] {
+  display: none;
+}
+
+.CartDrawer__Panel {
+  position: absolute;
+  inset: auto 0 0 auto;
+  top: 0;
+  height: 100%;
+  width: min(420px, 100%);
+  background: #fff;
+  border-radius: 16px 0 0 16px;
+  padding: 16px;
+  box-shadow: var(--elev);
+  transform: translateX(100%);
+  transition: transform var(--dur);
+}
+
+.CartDrawer[data-open="true"] .CartDrawer__Panel {
+  transform: translateX(0);
+}
+
+.CartDrawer__Header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.CartDrawer__Body {
+  max-height: calc(100% - 160px);
+  overflow: auto;
+  padding-right: 8px;
+}
+
+.CartDrawer__Items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.MiniItem {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 12px;
+  align-items: center;
+}
+
+.MiniItem__Row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.QtyBtn {
+  border: 1px solid #ddd;
+  background: #fff;
+  border-radius: 8px;
+  width: 28px;
+  height: 28px;
+}
+
+.QtyInput {
+  width: 52px;
+  text-align: center;
+}
+
+.IconButton {
+  border: none;
+  background: transparent;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.Button--primary {
+  background: #0a0a0a;
+  color: #fff;
+}
+
+.CartDrawer__Overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(100, 119, 154, 0.35);
+  backdrop-filter: blur(6px);
+  opacity: 0;
+  transition: opacity var(--dur);
+}
+
+.CartDrawer[data-open="true"] .CartDrawer__Overlay {
+  opacity: 1;
+}
