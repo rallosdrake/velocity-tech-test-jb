@@ -1,6 +1,5 @@
 (() => {
   const drawer = document.getElementById('CartDrawer');
-  console.log('jimmy drawer', drawer);
     if (!drawer) return;
     const panel = drawer.querySelector('.CartDrawer__Panel');
     const overlay = drawer.querySelector('.CartDrawer__Overlay');
@@ -142,7 +141,6 @@
     document.addEventListener('cart:updated', refreshCart);
 
     document.addEventListener('click', (e) => {
-      console.log('jimmy click', e.target);
       const btn = e.target.closest('.js-cart-toggle');
       if (!btn) return;
       e.preventDefault();
