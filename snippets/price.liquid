@@ -1,16 +1,14 @@
-{%- assign variant = product.selected_or_first_available_variant -%}
-
-{%- if variant.compare_at_price > variant.price -%}
+{%- if item.compare_at_price > item.price -%}
   <span class="Price Price--sale">
     <span class="Price__Current">
-      {{ variant.price | money }}
+      {{ item.price | money }}
     </span>
-    <s class="Price__Compare">
-      {{ variant.compare_at_price | money }}
-    </s>
+    <span class="Price__Compare">
+      {{ item.compare_at_price | money }}
+    </span>
   </span>
 {%- else -%}
   <span class="Price">
-    {{ variant.price | money }}
+    {{ item.price | money }}
   </span>
 {%- endif -%}
