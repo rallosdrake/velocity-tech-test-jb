@@ -1,61 +1,45 @@
 {{ 'collection.css' | asset_url | stylesheet_tag }}
 
 {% liquid
-    assign default_sort = collection.sort_by | default: collection.default_sort_by
-  %}
-  <section class="Collection" data-section-id="{{ section.id }}">
-    <header class="Collection__Header container">
-      <h1 class="Collection__Title">{{ collection.title }}</h1>
-      <p class="Collection__Count">{{ collection.all_products_count }} products</p>
-  
-      <form class="Collection__Sort" method="get" role="search">
-        {%- for filter in collection.filters -%}
-        {%- endfor -%}
-        <label class="visually-hidden" for="SortBy-{{ section.id }}">Sort</label>
-        <select id="SortBy-{{ section.id }}" name="sort_by" class="Select" onchange="this.form.submit()">
-          {%- for option in collection.sort_options -%}
-            <option value="{{ option.value }}" {% if option.value == default_sort %}selected{% endif %}>{{ option.name }}</option>
-          {%- endfor -%}
-        </select>
-      </form>
-    </header>
-  
-    {%- paginate collection.products by 24 -%}
-    <div class="Collection__Grid container grid">
-      {%- for product in collection.products -%}
-        {% render 'product-card', product: product %}
-      {%- else -%}
-        <p>No products found in this collection.</p>
+  assign default_sort = collection.sort_by | default: collection.default_sort_by
+%}
+
+<!-- Main collection section -->
+<section class="Collection" data-section-id="{{ section.id }}">
+  <header class="Collection__Header container">
+    <!-- Collection title -->
+    <h1 class="Collection__Title">{{ collection.title }}</h1>
+    <!-- Display total product count -->
+    <p class="Collection__Count">{{ collection.all_products_count }} products</p>
+
+    <!-- Sort form -->
+    <form class="Collection__Sort" method="get" role="search">
+      {%- for filter in collection.filters -%}
       {%- endfor -%}
-    </div>
-  
-    <nav class="Pagination container" role="navigation" aria-label="Pagination">
-      {%- if paginate.pages > 1 -%}
-        <ul class="Pagination__List">
-          {%- if paginate.previous -%}
-            <li><a href="{{ paginate.previous.url }}" rel="prev">Previous</a></li>
-          {%- endif -%}
-          {%- for part in paginate.parts -%}
-            <li>
-              {%- if part.is_link -%}
-                <a href="{{ part.url }}">{{ part.title }}</a>
-              {%- else -%}
-                <span aria-current="page">{{ part.title }}</span>
-              {%- endif -%}
-            </li>
-          {%- endfor -%}
-          {%- if paginate.next -%}
-            <li><a href="{{ paginate.next.url }}" rel="next">Next</a></li>
-          {%- endif -%}
-        </ul>
-      {%- endif -%}
-    </nav>
-    {%- endpaginate -%}
-  </section>
-  
-  {% schema %}
-  {
-    "name": "Main collection",
-    "settings": []
-  }
-  {% endschema %}
+      <label class="visually-hidden" for="SortBy-{{ section.id }}">Sort</label>
+      <select id="SortBy-{{ section.id }}" name="sort_by" class="Select" onchange="this.form.submit()">
+        <!-- Populate sort options -->
+        {%- for option in collection.sort_options -%}
+          <option value="{{ option.value }}" {% if option.value == default_sort %}selected{% endif %}>{{ option.name }}</option>
+        {%- endfor -%}
+      </select>
+    </form>
+  </header>
+
+  <div class="Collection__Grid container grid">
+    <!-- Render product cards -->
+    {%- for product in collection.products limit: 4 -%}
+      {% render 'product-card', product: product %}
+    {%- else -%}
+      <!-- Message when no products are found -->
+      <p>No products found in this collection.</p>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main collection",
+  "settings": []
+}
+{% endschema %}
