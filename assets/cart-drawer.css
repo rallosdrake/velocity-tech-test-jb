@@ -22,6 +22,12 @@
   transition: transform var(--duration);
 }
 
+@media (max-width: 768px) {
+  .CartDrawer__Panel {
+    width: 90%;
+  }
+}
+
 .CartDrawer[data-open="true"] .CartDrawer__Panel {
   transform: translateX(0);
 }
