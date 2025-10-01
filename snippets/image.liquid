@@ -3,7 +3,7 @@
 <img
     src="{{ image | image_url: width: 800 }}"
     srcset="{{ image | image_url: width: 400 }} 400w, {{ product.image | image_url: width: 800 }} 800w, {{ product.image | image_url: width: 1200 }} 1200w"
-    sizes="(min-width: 990px) 25vw, 50vw"
+    sizes="(min-width: 1200px) 33vw, (min-width: 768px) 50vw, 100vw"
     alt="{{ image.alt | escape }}"
     loading="lazy"
     class="ProductCard__Image"
