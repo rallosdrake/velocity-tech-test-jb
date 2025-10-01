@@ -7,40 +7,73 @@
     aria-modal="true"
     aria-labelledby="CartDrawer-Title"
     hidden
-  >
-    <div class="CartDrawer__Overlay" data-action="close"></div>
-    <aside class="CartDrawer__Panel" tabindex="-1">
-      <header class="CartDrawer__Header">
-        <h2 id="CartDrawer-Title">Your cart</h2>
-        <button class="IconButton" aria-label="Close cart" data-action="close">&times;</button>
-      </header>
-  
-      <div class="CartDrawer__Body" aria-live="polite">
-        {%- if cart != empty -%}
-          <ul class="CartDrawer__Items">
-            {%- for item in cart.items -%}
-              {% render 'mini-line-item', item: item %}
-            {%- endfor -%}
-          </ul>
-        {%- else -%}
-          <p class="CartDrawer__Empty">Your cart is empty.</p>
-        {%- endif -%}
+>
+  <!-- Overlay for closing the cart drawer -->
+  <div class="CartDrawer__Overlay" data-action="close"></div>
+
+  <!-- Main panel for the cart drawer -->
+  <aside class="CartDrawer__Panel" tabindex="-1">
+    <header class="CartDrawer__Header">
+      <!-- Cart title -->
+      <h2 id="CartDrawer-Title">Your cart</h2>
+      <!-- Close button -->
+      <button class="IconButton" aria-label="Close cart" data-action="close">&times;</button>
+    </header>
+
+    <!-- Cart body: displays cart items or empty message -->
+    <div class="CartDrawer__Body" aria-live="polite">
+      <!-- Button to clear the cart -->
+      <button type="button" class="js-clear-cart">Click me to clear</button>
+
+      {%- if cart != empty -%}
+        <ul class="CartDrawer__Items">
+          {%- for item in cart.items -%}
+            <li class="CartDrawer__Item" data-line-key="{{ item.key }}">
+              <!-- Link to the product -->
+              <a href="{{ item.url }}">{{ item.product.title }}</a>
+              <!-- Render product image -->
+              {%- render 'image', product: item.product, image: item.image -%}
+              <!-- Render product price -->
+              {%- render 'price', item: item.variant -%}
+              <!-- Quantity controls -->
+              <div class="CartDrawer__Qty" data-line-key="{{ item.key }}">
+                <button class="QtyBtn" data-action="decrement" aria-label="Decrease quantity">−</button>
+                <input
+                  class="QtyInput"
+                  type="number"
+                  min="0"
+                  value="{{ item.quantity }}"
+                  inputmode="numeric"
+                  aria-label="Quantity for {{ item.product.title | escape }}"
+                >
+                <button class="QtyBtn" data-action="increment" aria-label="Increase quantity">+</button>
+              </div>
+              <!-- Remove item button -->
+              <button class="CartDrawer__Remove" data-action="remove" aria-label="Remove {{ item.title | escape }}">Remove</button>
+            </li>
+          {%- endfor -%}
+        </ul>
+      {%- else -%}
+        <!-- Message displayed when the cart is empty -->
+        <p class="CartDrawer__Empty">Your cart is empty.</p>
+      {%- endif -%}
+    </div>
+
+    <!-- Footer section with subtotal and checkout button -->
+    <footer class="CartDrawer__Footer">
+      <div class="CartDrawer__Subtotal">
+        <span>Subtotal</span>
+        <strong class="js-cart-subtotal">{{ cart.total_price | money }}</strong>
       </div>
-  
-      <footer class="CartDrawer__Footer">
-        <div class="CartDrawer__Subtotal">
-          <span>Subtotal</span>
-          <strong class="js-cart-subtotal">{{ cart.total_price | money }}</strong>
-        </div>
-        <p class="CartDrawer__Note">Taxes and shipping calculated at checkout.</p>
-        <a class="Button Button--primary" href="/checkout">Checkout</a>
-      </footer>
-    </aside>
-  </div>
-  
-  {% schema %}
-  {
-    "name": "Cart drawer",
-    "settings": []
-  }
-  {% endschema %}
+      <p class="CartDrawer__Note">Taxes and shipping calculated at checkout.</p>
+      <a class="Button Button--primary" href="/checkout">Checkout</a>
+    </footer>
+  </aside>
+</div>
+
+{% schema %}
+{
+  "name": "Cart drawer",
+  "settings": []
+}
+{% endschema %}
