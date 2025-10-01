@@ -1,0 +1,12 @@
+{% assign image = product.images.first %}
+
+<img
+    src="{{ image | image_url: width: 800 }}"
+    srcset="{{ image | image_url: width: 400 }} 400w, {{ product.image | image_url: width: 800 }} 800w, {{ product.image | image_url: width: 1200 }} 1200w"
+    sizes="(min-width: 990px) 25vw, 50vw"
+    alt="{{ image.alt | escape }}"
+    loading="lazy"
+    class="ProductCard__Image"
+    width="800"
+    height="800"
+/>
